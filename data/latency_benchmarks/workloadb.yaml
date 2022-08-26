@@ -20,11 +20,25 @@ benchmarks:
       cloud_spanner_config: regional-us-west1
       cloud_spanner_nodes: 3
 
+      # cloud_spanner_db_dialect: POSTGRESQL
+      cloud_spanner_db_dialect: GOOGLE_STANDARD_SQL
+      
+      cloud_spanner_ycsb_readmode: query
+      cloud_spanner_ycsb_updatemode: dml
+      cloud_spanner_ycsb_insertmode: insert
+
+      # custom flags
+      cloud_spanner_ycsb_batchinserts: 1000
+      ycsb_tar_url: https://github.com/hengfengli/YCSB/releases/download/v0.18.0-latest-spanner/ycsb-cloudspanner-binding-0.18.0-latest-spanner.tar.gz
+
       # GCE Provisioning: 5 In-Region VMs per Spanner Node
       ycsb_client_vms: 15
       machine_type: n1-standard-2
       gce_network_name: default
-      zones: us-west1-a
+      zone: us-west1-a
+
+      connect_via_internal_ip: true
+      ssh_via_internal_ip: true
 
       # Data: 100M 1kb rows (100GB total)
       ycsb_record_count: 100000000
@@ -35,9 +49,9 @@ benchmarks:
       ycsb_preload_threads: '25'
 
       # Sleep 1hr between Load and Run phases
-      ycsb_sleep_after_load_in_sec: 3600
+      ycsb_sleep_after_load_in_sec: 1800
 
-      # Execute workloadb for 30minutes
+      # Execute workloada for 30minutes
       ycsb_workload_files: workloadb
       ycsb_timelimit: 1800
       ycsb_operation_count: 100000000 # Opcount high so we hit timelimit
